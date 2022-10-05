@@ -1,3 +1,49 @@
-h1{
-    color:purple
+*{
+    box-sizing: border-box;
 }
+html, body{
+    height: 100%;
+}
+body{ 
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+#board{
+    width: 360px;
+    height: 360px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    }
+.cell{
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex: 0 0 120px;
+    
+
+    
+}
+.cell:nth-child(n+4):nth-child(-n+6) {
+    border-top: 3px solid black;
+    border-bottom: 3px solid black;
+  }
+  .cell span {
+    text-transform: uppercase;
+    font-family: monospace;
+    font-size: 3rem;
+  }
+  .cell:nth-child(3n+2) { 
+    border-left: 3px solid black;
+    border-right: 3px solid black;
+  }
+  button{
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+  }
