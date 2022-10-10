@@ -15,8 +15,8 @@ body{
     width: 360px;
     height: 360px;
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
     }
 .cell{
     
@@ -32,18 +32,32 @@ body{
 .cell:nth-child(n+4):nth-child(-n+6) {
     border-top: 3px solid black;
     border-bottom: 3px solid black;
+    display: flex;
   }
-  .cell span {
+  /* .cell span {
     text-transform: uppercase;
     font-family: monospace;
     font-size: 3rem;
-  }
+  } */
   .cell:nth-child(3n+2) { 
     border-left: 3px solid black;
     border-right: 3px solid black;
+    display: flex;
   }
-  button{
+  .button-div{
     display: flex;
     justify-content: center;
-    align-items: baseline;
+    align-items: center;
+    margin-top: 600px;
+    
   }
+  #winning-message{
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+footer{
+  display:flex;
+  justify-content: center;
+  /* margin-right: 500px; */
+}  
