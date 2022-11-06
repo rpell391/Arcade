@@ -1,19 +1,28 @@
 let click = "X";
-// let cells = Array.from(document.getElementsByClassName(cell));
+let singlePlayerGame = false;
+const singlePlayerGameButton = document.getElementById("singlePlayerGame");
+const restartButton = document.getElementById("restartButton");
+singlePlayerGameButton.addEventListener("click", () => {
+  singlePlayerGame = true;
+});
+
 const gameArea = document.getElementById("board");
 gameArea.addEventListener("click", function (clickEvent) {
   if (!clickEvent.target.innerText.length) {
     clickEvent.target.innerText = click;
     checkWin();
-
-    if (click === "X") {
-      click = "O";
+    if (singlePlayerGame === false) {
+      if (click === "X") {
+        click = "O";
+      } else {
+        click = "X";
+      }
     } else {
-      click = "X";
+      computerTurn();
     }
   }
 });
-
+console.log(singlePlayerGame);
 const gameBoard = document.getElementById("board");
 
 const winningConditions = [
@@ -26,6 +35,7 @@ const winningConditions = [
   [0, 4, 8],
   [2, 4, 6],
 ];
+const gameWinner = document.getElementById("winningMessage");
 function checkWin() {
   let cell0 = document.getElementById("0");
   let cell1 = document.getElementById("1");
@@ -36,8 +46,6 @@ function checkWin() {
   let cell6 = document.getElementById("6");
   let cell7 = document.getElementById("7");
   let cell8 = document.getElementById("8");
-
-  const gameWinner = document.getElementById("winningMessage");
 
   if (
     click === cell0.innerText &&
@@ -95,51 +103,59 @@ function checkWin() {
   ) {
     gameWinner.innerText = click;
   }
+  if (gameWinner.innerText.includes("win")) {
+    endOfGame();
+  }
 }
 
-// function computerTurn() {
-//   let randomCell = math.floor(math.random() * 9);
-//   if (cells[randomCell.innerText === ""]) {
-//     cells[randomCell].innerText = "O";
-//     checkWin();
-//   } else {
-//     computerTurn();
-//   }
-// }
-// let number = getRandomNumber();
+function computerTurn() {
+  let cells = Array.from(document.getElementsByClassName("cell"));
+  let randomCell = Math.floor(Math.random() * 9);
+  if (cells[randomCell].innerText === "") {
+    cells[randomCell].innerText = "O";
+    click = "O";
+    checkWin();
+    click = "X";
+  } else {
+    computerTurn();
+  }
+}
+let number = getRandomNumber();
 
-// let cell0 = document.getElementById("0");
-// let cell1 = document.getElementById("1");
-// let cell2 = document.getElementById("2");
-// let cell3 = document.getElementById("3");
-// let cell4 = document.getElementById("4");
-// let cell5 = document.getElementById("5");
-// let cell6 = document.getElementById("6");
-// let cell7 = document.getElementById("7");
-// let cell8 = document.getElementById("8");
+let cell0 = document.getElementById("0");
+let cell1 = document.getElementById("1");
+let cell2 = document.getElementById("2");
+let cell3 = document.getElementById("3");
+let cell4 = document.getElementById("4");
+let cell5 = document.getElementById("5");
+let cell6 = document.getElementById("6");
+let cell7 = document.getElementById("7");
+let cell8 = document.getElementById("8");
 
-// const cellArr = [cell0, cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8];
+const cellArr = [cell0, cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8];
 
 // cellArr.forEach(function (cell) {
 //   if (cell.innerText === "") {
 //     cell.innerText = "O";
 //   }
 // });
-// console.log(number);
+console.log(number);
 
-// function getRandomNumber() {
-//   return Math.floor(Math.random() * 9);
-//}
-
-// computerTurn();
+function getRandomNumber() {
+  return Math.floor(Math.random() * 9);
+}
 
 // let singlePlayerGame;
 
-// let singlePlayerBut/ton = document.getElementById("singlePlayerGame");
-// singlePlayerButton.addEventListener("click", (singlePlayerGame = true));
+let singlePlayerButton = document.getElementById("singlePlayerGame");
+singlePlayerButton.addEventListener("click", () => {
+  singlePlayerGame = true;
+});
 
-// let twoPlayerButton = document.getElementById("twoPlayerGame");
-// twoPlayerButton.addEventListener("click", (singlePlayerGame = false));
+let twoPlayerButton = document.getElementById("twoPlayerGame");
+twoPlayerButton.addEventListener("click", () => {
+  singlePlayerGame = false;
+});
 
 window.onload = function () {
   let username = window.prompt("Enter Player Name");
@@ -147,17 +163,14 @@ window.onload = function () {
 };
 
 function endOfGame() {
-  if (winningPlayer === true || draw === true) {
-    gameOver = true;
-    restartButton.style.visibility = "visible";
-    restartButton.addEventListener("click", resetGrid);
-  }
+  restartButton.style.visibility = "visible";
+  restartButton.addEventListener("click", resetGrid);
 }
-// function resetGrid() {
-//   for (let i = 0; i < cells.length; i++) {
-//     cells[i].innerText = "";
-//   }
-//   gameWinner = false;
+function resetGrid() {
+  let cells = Array.from(document.getElementsByClassName("cell"));
+  for (let i = 0; i < cells.length; i++) {
+    cells[i].innerText = "";
+  }
 
-//   winMessage.innerText = "Game On!";
-// }
+  gameWinner.innerText = "Game On!";
+}
